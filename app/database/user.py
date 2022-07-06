@@ -1,3 +1,4 @@
+from unittest import result
 from app.database import get_db
 
 
@@ -13,9 +14,41 @@ def output_formatter(results):
         out.append(user)
     return out
 
-    def scan():
-        cursor = get_db().execute(
-            "SELECT * FROM user WHERE active=1", ())
-        results = cursor.fetchall()
-        cursor.close()
-        return output_formatter(results)
+
+def scan():
+    cursor = get_db().execute(
+        "SELECT * FROM user WHERE active=1", ())
+    results = cursor.fetchall()
+    cursor.close()
+    return output_formatter(results)
+
+
+def select_by_id(id):
+    cursor = get_db().execute(
+        "SELECT * FROM user WHERE id=? AND active=1", (id,)
+    )
+    results = cursor.fetchall()
+    cursor.close()  # close db connection (limit of connections are 1024)
+    return output_formatter(results)
+
+
+def insert(data):
+    """create a new record in the user TABLE"""
+
+    query = """
+    INSERT INTO user (
+        fisrt_name, 
+        last_name, 
+        hobbies
+    ) VALUES (?,?,?)
+    """
+
+    values = (
+        data.get("first_name"),
+        data.get("last_name"),
+        data.get("hobbies")
+    )
+    cursor = get_db()
+    cursor.execute(query, values)
+    cursor.commit()  # apply changes
+    cursor.close()

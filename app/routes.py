@@ -1,9 +1,10 @@
 from flask import (
-    FLASK,
+    Flask,
     request
 )
 
 from datetime import datetime
+from app.database import user
 
 
 app = Flask(__name__)
@@ -50,6 +51,7 @@ def get_user_by_id(pk):
     return out
 
 
+# currently not working
 @app.post("/users")
 def create_users():
     user_data = request.json  # request context object
@@ -70,11 +72,11 @@ def delete_user(pk):
     return "", 204
 
 
-@app.get("/report/cars")
-def get_report():
+# @app.get("/report/cars")
+# def get_report():
 
-    out = {
-        "ok": True,
-        "cars":}
+#     out = {
+#         "ok": True,
+#         "cars":}
 
-    return out, 204
+#     return out, 204
