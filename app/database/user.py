@@ -37,7 +37,7 @@ def insert(data):
 
     query = """
     INSERT INTO user (
-        fisrt_name, 
+        first_name, 
         last_name, 
         hobbies
     ) VALUES (?,?,?)

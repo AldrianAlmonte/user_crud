@@ -36,3 +36,14 @@ INSERT INTO user (
     "Garcia",
     "reading"
 );
+
+
+INSERT INTO user (
+    first_name, 
+    last_name, 
+    hobbies
+) VALUES (
+    "Clifford", 
+    "Moss", 
+    "barking"
+);
