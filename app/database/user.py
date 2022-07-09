@@ -52,3 +52,11 @@ def insert(data):
     cursor.execute(query, values)
     cursor.commit()  # apply changes
     cursor.close()
+
+
+def deactivate(id):
+    """soft delete user"""
+    cursor = get_db()
+    cursor.execute("UPDATE user set active=0 WHERE id=?", (id,))
+    cursor.commit()
+    cursor.close()
